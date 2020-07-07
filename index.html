@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses Tracker</title>
+</head>
+<body>
+    <div id='budget'>
+        <h2>Your monthly budget is:</h2>
+        <p id='monthlyBudget'>£400</p>
+    </div>
+    <div id='expenses'>
+        <h2>Your total expenses so far is:</h2>
+        <p id='totalExpenses'>£50</p>
+    </div>
+    <div id='transactionsLog'>
+        <h2>Expenses breakdown</h2>
+        <ul id='list'>
+            <li>milk - £3</li>
+            <li>sugar - £2</li>
+            <li>bread - £1</li>
+        </ul>
+    </div>
+    <div id='newEntry'>
+        <h2>New Entry</h2>
+        <form id='userInput'>
+            <div>
+                <label for='productName'>Product Name</label>
+                <input type='text' id='productName' placeholder='item name here'>
+                <label for='productAmount'>Product Amount</label>
+                <input type='text' id='productAmount' placeholder='item amount here'>
+                <input type="submit" id='submitProduct' value='Add item'>
+            </div>
+        </form>
+    </div>
+    <script src='script.js'></script>
+</body>
+</html>
