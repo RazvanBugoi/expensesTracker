@@ -28,8 +28,11 @@ function totalExpenses() {
 
 function addTransaction(item){
     let product = document.createElement('li');
-    product.innerHTML = `${item.productName} - £${item.amount}`;
-    list.appendChild(product);
+    let deleteButton = document.createElement('button')
+    product.innerHTML = `${item.productName} - £${item.amount} ${deleteButton}`;
+    // deleteButton.innerHTML = 'DELETE ITEM'
+    list.appendChild(product, deleteButton);
+   // deleteButton.appendChild(product);
 }
 
 
