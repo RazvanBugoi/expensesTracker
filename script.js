@@ -11,11 +11,11 @@ const form = document.getElementById('userInput');
 
 
 let transactionLog = [
-    {productName:'milk', amount: 30},
-    {productName:'sugar', amount: 15},
-    {productName:'coffee', amount: 40},
-    {productName:'bread', amount: 10},
-    {productName:'tea', amount: 22}
+    {productName:'milk', amount: 30, id: 1},
+    {productName:'sugar', amount: 15, id: 2},
+    {productName:'coffee', amount: 40, id: 3},
+    {productName:'bread', amount: 10, id: 4},
+    {productName:'tea', amount: 22, id: 5}
 ]
 
 function totalExpenses() {
@@ -28,14 +28,15 @@ function totalExpenses() {
 
 function addTransaction(item){
     let product = document.createElement('li');
-    let deleteButton = document.createElement('button')
-    product.innerHTML = `${item.productName} - £${item.amount} ${deleteButton}`;
-    // deleteButton.innerHTML = 'DELETE ITEM'
-    list.appendChild(product, deleteButton);
-   // deleteButton.appendChild(product);
+    product.innerHTML = `${item.productName} - £${item.amount} <button onclick=deleteItem(${item.id})>DELETE</button>`;
+    list.appendChild(product);
 }
 
-
+function deleteItem(id) {
+    transactionLog = transactionLog.filter((element) => element.id !== id);
+    console.log(transactionLog);
+    // transactionLog.forEach(addTransaction)
+}
 
 function cds() {
     alert('hello');
