@@ -4,10 +4,7 @@ const list = document.getElementById('list');
 const productName = document.getElementById('productName');
 const productAmount = document.getElementById('productAmount');
 const form = document.getElementById('userInput');
-// lista, product name, product amount DONE
 
-// sa fac un array in care am niste obiecte de tip transaction, ex : {productName:'milk', amount: £30} - cu sume diferite.
-// DONE
 
 
 let transactionLog = [
@@ -34,23 +31,29 @@ function addTransaction(item){
 
 function deleteItem(id) {
     transactionLog = transactionLog.filter((element) => element.id !== id);
-    console.log(transactionLog);
-    // transactionLog.forEach(addTransaction)
+    list.innerHTML = '';
+    transactionLog.forEach(addTransaction)
+    totalExpenses();
 }
 
-function cds() {
-    alert('hello');
+function newProduct() {
+    if(productName.value.length != 0 && productAmount.value.length != 0) {
+        transactionLog.push({productName: productName.value, amount: productAmount.value, id: 123});
+        list.innerHTML = '';
+        transactionLog.forEach(addTransaction);
+    }
 }
 
-
+function randomId() {
+    return Number((new Date().getTime() * Math.random()).toFixed());
+}
 
 (function init() {
-    form.addEventListener('submit', cds)
+    form.addEventListener('submit', newProduct)
     budget.innerHTML = `£500.00`;
     transactionLog.forEach(addTransaction)
     totalExpenses();
 })()
-// alt mod de a apela o functie IIFE (immediately invoked function expression)
 
 
 
