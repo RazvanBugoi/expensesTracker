@@ -4,8 +4,10 @@ const list = document.getElementById('list');
 const productName = document.getElementById('productName');
 const productAmount = document.getElementById('productAmount');
 const form = document.getElementById('userInput');
+const btn = document.getElementById('submitProduct');
 
 
+let storedItems = JSON.parse(localStorage.getItem('items')) || [];  
 
 let transactionLog = [
     {productName:'milk', amount: 30, id: 1},
@@ -38,8 +40,14 @@ function deleteItem(id) {
 
 function newProduct() {
     if(productName.value.length != 0 && productAmount.value.length != 0) {
-        transactionLog.push({productName: productName.value, amount: productAmount.value, id: 123});
         list.innerHTML = '';
+        let obj = {
+            productName: productName.value,
+            amount: productAmount.value,
+            id: randomId()
+        };
+        transactionLog.push(obj);
+        console.log(obj);
         transactionLog.forEach(addTransaction);
     }
 }
@@ -49,7 +57,7 @@ function randomId() {
 }
 
 (function init() {
-    form.addEventListener('submit', newProduct)
+    btn.addEventListener('click', newProduct);
     budget.innerHTML = `£500.00`;
     transactionLog.forEach(addTransaction)
     totalExpenses();
