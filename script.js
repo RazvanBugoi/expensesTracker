@@ -49,6 +49,7 @@ function newProduct(event) {
 
         transactionLog.push(obj);
         localStorage.setItem('items', JSON.stringify(transactionLog));
+        storedItems = JSON.parse(localStorage.getItem('items'));
         transactionLog.forEach(addTransaction);
     }
     event.preventDefault();
