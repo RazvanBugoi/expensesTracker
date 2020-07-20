@@ -19,7 +19,7 @@ let transactionLog = [
 
 function totalExpenses() {
     let newTotalExpenses = document.getElementById('totalExpenses');
-    let totalAmount = transactionLog.map((element) => element['amount']).reduce((sum, current) => sum + current, 0).toFixed(2);
+    let totalAmount = transactionLog.map((element) => Number(element['amount'])).reduce((sum, current) => sum + current, 0).toFixed(2);
     newTotalExpenses.innerHTML = `£${totalAmount}`;
 }
 
@@ -38,7 +38,7 @@ function deleteItem(id) {
     totalExpenses();
 }
 
-function newProduct() {
+function newProduct(event) {
     if(productName.value.length != 0 && productAmount.value.length != 0) {
         list.innerHTML = '';
         let obj = {
@@ -46,10 +46,13 @@ function newProduct() {
             amount: productAmount.value,
             id: randomId()
         };
+
         transactionLog.push(obj);
-        console.log(obj);
+        localStorage.setItem('items', JSON.stringify(transactionLog));
         transactionLog.forEach(addTransaction);
     }
+    event.preventDefault();
+    totalExpenses();
 }
 
 function randomId() {
