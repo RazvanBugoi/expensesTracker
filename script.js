@@ -9,13 +9,7 @@ const btn = document.getElementById('submitProduct');
 
 let storedItems = JSON.parse(localStorage.getItem('items')) || [];  
 
-let transactionLog = [
-    {productName:'milk', amount: 30, id: 1},
-    {productName:'sugar', amount: 15, id: 2},
-    {productName:'coffee', amount: 40, id: 3},
-    {productName:'bread', amount: 10, id: 4},
-    {productName:'tea', amount: 22, id: 5}
-]
+let transactionLog = [];
 
 function totalExpenses() {
     let newTotalExpenses = document.getElementById('totalExpenses');
@@ -33,12 +27,14 @@ function addTransaction(item){
 
 function deleteItem(id) {
     transactionLog = transactionLog.filter((element) => element.id !== id);
+    updateLocalStorage();
     list.innerHTML = '';
     transactionLog.forEach(addTransaction)
-    totalExpenses();
+    totalExpenses(); // cand nu avem elemente nu functioneaza, have a look
 }
 
 function newProduct(event) {
+    event.preventDefault();
     if(productName.value.length != 0 && productAmount.value.length != 0) {
         list.innerHTML = '';
         let obj = {
@@ -46,14 +42,17 @@ function newProduct(event) {
             amount: productAmount.value,
             id: randomId()
         };
-
         transactionLog.push(obj);
-        localStorage.setItem('items', JSON.stringify(transactionLog));
-        storedItems = JSON.parse(localStorage.getItem('items'));
+        updateLocalStorage();
         transactionLog.forEach(addTransaction);
     }
-    event.preventDefault();
     totalExpenses();
+}
+
+function updateLocalStorage(){
+    localStorage.setItem('items', JSON.stringify(transactionLog));
+    storedItems = JSON.parse(localStorage.getItem('items'))
+    transactionLog = JSON.parse(localStorage.getItem('items'));
 }
 
 function randomId() {
@@ -63,7 +62,7 @@ function randomId() {
 (function init() {
     btn.addEventListener('click', newProduct);
     budget.innerHTML = `£500.00`;
-    transactionLog.forEach(addTransaction)
+    storedItems.forEach(addTransaction)
     totalExpenses();
 })()
 
