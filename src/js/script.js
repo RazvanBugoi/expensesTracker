@@ -32,6 +32,7 @@ function deleteItem(id) {
     list.innerHTML = '';
     storedItems.forEach(addTransaction)
     totalExpenses(); 
+    location.reload();
 }
 
 function newProduct(event) {
